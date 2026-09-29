@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Sign Language Translator Studio | SignTranslate AI</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/translator.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
+</head>
+<body>
+
+    <!-- ============================================================
+         TOP NAVBAR
+         ============================================================ -->
+    <header class="navbar">
+        <div class="container navbar-container">
+            <a href="{{ url_for('home') }}" class="nav-brand">
+                <span class="brand-icon">🤟</span>
+                <div class="brand-text">
+                    <h1>SignTranslate <span>AI</span></h1>
+                    <span class="brand-subtitle">AI Sign Language Translator</span>
+                </div>
+            </a>
+
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="{{ url_for('home') }}" class="nav-link">Home</a></li>
+                    <li><a href="{{ url_for('translator') }}" class="nav-link active">Live Translator</a></li>
+                    <li><a href="{{ url_for('dictionary') }}" class="nav-link">Sign Dictionary</a></li>
+                    <li><a href="{{ url_for('about') }}" class="nav-link">About</a></li>
+                </ul>
+            </nav>
+
+            <div class="nav-actions">
+                <div class="lang-selector-wrapper">
+                    <select id="langSelector" class="lang-selector" aria-label="Translation Language">
+                        <option value="en-US">English (US)</option>
+                        <option value="hi-IN">Hindi (हिन्दी)</option>
+                        <option value="te-IN">Telugu (తెలుగు)</option>
+                        <option value="ta-IN">Tamil (தமிழ்)</option>
+                        <option value="kn-IN">Kannada (ಕನ್ನಡ)</option>
+                        <option value="ml-IN">Malayalam (മലയാളം)</option>
+                        <option value="es-ES">Spanish (Español)</option>
+                        <option value="fr-FR">French (Français)</option>
+                    </select>
+                    <span class="lang-icon-arrow">▼</span>
+                </div>
+
+                <button id="themeToggleBtn" class="theme-toggle-btn" aria-label="Toggle theme">☀️</button>
+                <button id="mobileMenuBtn" class="mobile-menu-btn" aria-label="Toggle mobile menu">☰</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Drawer -->
+    <div id="mobileNavDrawer" class="mobile-nav-drawer">
+        <ul class="mobile-nav-links">
+            <li><a href="{{ url_for('home') }}" class="mobile-nav-link"><span>🏠</span> Home</a></li>
+            <li><a href="{{ url_for('translator') }}" class="mobile-nav-link active"><span>📷</span> Live Translator</a></li>
+            <li><a href="{{ url_for('dictionary') }}" class="mobile-nav-link"><span>📖</span> Dictionary</a></li>
+            <li><a href="{{ url_for('about') }}" class="mobile-nav-link"><span>ℹ️</span> About</a></li>
+        </ul>
+    </div>
+
+    <main class="container translator-page">
+
+        <!-- Top Header & Controls Strip -->
+        <div class="translator-top-bar">
+            <div class="translator-title-group">
+                <h1><span>📷</span> LIVE SIGN LANGUAGE TRANSLATOR</h1>
+                <p>Real-time computer vision gesture detection and instant voice translation</p>
+            </div>
+
+            <!-- Auto-Speak Toggle Option -->
+            <div class="auto-speak-wrapper">
+                <span>Auto-Speak Signs:</span>
+                <label class="switch">
+                    <input type="checkbox" id="autoSpeakToggle">
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+
+        <!-- Studio Two-Column Grid -->
+        <div class="translator-studio-grid">
+
+            <!-- LEFT COLUMN: LIVE CAMERA & CHECKLIST -->
+            <div class="studio-camera-column">
+                <div class="studio-camera-card">
+                    <div class="studio-camera-header">
+                        <div class="panel-header-left">
+                            <h3 class="panel-title"><span>📷</span> Camera Feed</h3>
+                            <span class="panel-subtitle">640x480 Real-Time Video</span>
+                        </div>
+
+                        <!-- Tool Strip -->
+                        <div class="camera-tools-strip">
+                            <button id="toggleLandmarksBtn" class="tool-toggle-btn active" title="Toggle hand skeleton overlay">
+                                <span>🦴</span> Landmarks
+                            </button>
+                            <div class="camera-status-pill">
+                                <span id="cameraStatusDot" class="status-indicator-dot offline"></span>
+                                <span id="cameraStatusText">Camera Off</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="studio-video-container">
+                        <div class="camera-live-badge">
+                            <span class="pulse-dot"></span> LIVE
+                        </div>
+
+                        <video id="camera" autoplay playsinline muted></video>
+                        <canvas id="cameraOverlayCanvas"></canvas>
+
+                        <div id="cameraPlaceholder" class="camera-placeholder">
+                            <div class="camera-placeholder-icon">📷</div>
+                            <h3>Camera Ready</h3>
+                            <p>Press "Start Camera" below to activate your webcam or phone camera.</p>
+                        </div>
+                    </div>
+
+                    <div class="camera-controls-bar">
+                        <div class="camera-btn-group">
+                            <button id="startCamera" class="btn btn-primary">
+                                <span>▶</span> Start Camera
+                            </button>
+                            <button id="stopCamera" class="btn btn-secondary">
+                                <span>■</span> Stop Camera
+                            </button>
+                            <button id="captureFrame" class="btn btn-secondary">
+                                <span>📸</span> Capture Frame
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Processing Status Checklist -->
+                <div class="ai-checklist-card">
+                    <h4 class="checklist-title">AI Processing Pipeline Status</h4>
+                    <ul class="checklist-items">
+                        <li id="chkCamera" class="checklist-item">
+                            <span class="check-icon">✓</span>
+                            <span>Camera connected</span>
+                        </li>
+                        <li id="chkHand" class="checklist-item">
+                            <span class="check-icon">✓</span>
+                            <span>Hand detected</span>
+                        </li>
+                        <li id="chkFeatures" class="checklist-item">
+                            <span class="check-icon">✓</span>
+                            <span>Features extracted</span>
+                        </li>
+                        <li id="chkModel" class="checklist-item active">
+                            <span class="check-icon">✓</span>
+                            <span>AI model running</span>
+                        </li>
+                        <li id="chkPrediction" class="checklist-item">
+                            <span class="check-icon">✓</span>
+                            <span>Prediction generated</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN: AI PREDICTION & SENTENCE ACCUMULATOR -->
+            <div class="studio-prediction-column">
+                <div class="dashboard-panel">
+                    <div class="panel-header">
+                        <div class="panel-header-left">
+                            <h3 class="panel-title"><span>🤖</span> AI Recognition</h3>
+                            <span class="panel-subtitle">Neural Classification</span>
+                        </div>
+                        <span id="aiModelBadge" class="badge badge-ai">Model Ready</span>
+                    </div>
+
+                    <div class="prediction-panel-body">
+                        <!-- Detected Sign -->
+                        <div class="prediction-box-main">
+                            <div class="prediction-box-header">
+                                <span class="prediction-section-label">DETECTED SIGN</span>
+                                <span id="predictionSignIcon" class="prediction-sign-icon">🤟</span>
+                            </div>
+
+                            <div id="predictionSign" class="prediction-sign-display">
+                                —
+                            </div>
+
+                            <p id="predictionStatus" class="prediction-hint">
+                                Waiting for hand sign...
+                            </p>
+                        </div>
+
+                        <!-- Dynamic Confidence Bar -->
+                        <div class="confidence-module">
+                            <div class="confidence-header-row">
+                                <span class="confidence-title">Confidence</span>
+                                <strong id="confidenceValue" class="confidence-number">0%</strong>
+                            </div>
+                            <div class="confidence-track">
+                                <div id="confidenceBar" class="confidence-fill" style="width: 0%;"></div>
+                            </div>
+                        </div>
+
+                        <!-- Translation Output -->
+                        <div class="translation-module">
+                            <div class="translation-label-row">
+                                <span class="prediction-section-label">TRANSLATION</span>
+                                <span class="badge badge-ai">Speech Ready</span>
+                            </div>
+
+                            <div id="translationText" class="translation-output-text">
+                                Waiting for translation...
+                            </div>
+                            <div id="multilingualSub" class="multilingual-subtitle"></div>
+
+                            <div class="translation-action-buttons">
+                                <button id="speakButton" class="btn btn-success">
+                                    <span>🔊</span> Speak Translation
+                                </button>
+                                <button id="stopVoiceButton" class="btn btn-secondary">
+                                    <span>⏹</span> Stop Voice
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="ai-status-footer">
+                            <span id="aiModelStatusText">AI Model Active</span>
+                            <span>Frame Rate: ~2.5 FPS</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Continuous Sentence Builder / Transcription Box -->
+        <div class="sentence-builder-card">
+            <div class="sentence-header">
+                <h3><span>📝</span> Sentence & Phrase Builder</h3>
+                <span class="badge badge-ai">Continuous Stream</span>
+            </div>
+
+            <div id="sentenceOutput" class="sentence-text-box">
+                <span class="sentence-placeholder">Recognized signs will accumulate here as a continuous sentence...</span>
+            </div>
+
+            <div class="sentence-actions-bar">
+                <div class="sentence-btn-group">
+                    <button id="speakSentenceBtn" class="btn btn-primary" title="Speak entire sentence">
+                        <span>🔊</span> Speak Entire Sentence
+                    </button>
+                    <button id="copySentenceBtn" class="btn btn-secondary" title="Copy text to clipboard">
+                        <span>📋</span> Copy Text
+                    </button>
+                    <button id="clearSentenceBtn" class="btn btn-danger" title="Clear current sentence">
+                        <span>🗑</span> Clear Sentence
+                    </button>
+                </div>
+                <small style="color: var(--text-muted);">Hold gesture steady for auto-append</small>
+            </div>
+        </div>
+
+        <!-- Recent Translations Table -->
+        <div class="table-card">
+            <div class="table-header-bar">
+                <div>
+                    <h3 class="panel-title"><span>📋</span> Session Translation Log</h3>
+                    <span class="panel-subtitle">History of recognized gestures</span>
+                </div>
+                <button id="clearHistoryBtn" class="btn btn-secondary" style="font-size: 0.85rem; padding: 0.45rem 0.9rem;">
+                    <span>🗑</span> Clear Log
+                </button>
+            </div>
+
+            <div class="table-responsive">
+                <table class="history-table">
+                    <thead>
+                        <tr>
+                            <th>Sign</th>
+                            <th>Translation</th>
+                            <th>Confidence</th>
+                            <th>Time</th>
+                        </tr>
+                    </thead>
+                    <tbody id="historyTableBody">
+                        <tr>
+                            <td colspan="4">
+                                <div class="empty-history-msg">
+                                    <span class="empty-history-icon">📋</span>
+                                    <p>No translations logged yet in this session.</p>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-bottom" style="border: none; padding-top: 0;">
+            <p>© <span class="current-year"></span> SignTranslate AI. Real-Time Neural Gesture Translation.</p>
+            <p><a href="{{ url_for('home') }}">Back to Dashboard</a> | <a href="{{ url_for('dictionary') }}">Sign Dictionary</a></p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Files -->
+    <script src="{{ url_for('static', filename='js/camera.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/translator.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

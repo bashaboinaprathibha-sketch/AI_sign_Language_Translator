@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | AI Sign Language Translator</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
+</head>
+<body>
+
+    <!-- TOP NAVBAR -->
+    <header class="navbar">
+        <div class="container navbar-container">
+            <a href="{{ url_for('home') }}" class="nav-brand">
+                <span class="brand-icon">🤟</span>
+                <div class="brand-text">
+                    <h1>SignTranslate <span>AI</span></h1>
+                    <span class="brand-subtitle">AI Sign Language Translator</span>
+                </div>
+            </a>
+
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="{{ url_for('home') }}" class="nav-link">Home</a></li>
+                    <li><a href="{{ url_for('translator') }}" class="nav-link">Live Translator</a></li>
+                    <li><a href="{{ url_for('dictionary') }}" class="nav-link">Sign Dictionary</a></li>
+                    <li><a href="{{ url_for('about') }}" class="nav-link active">About</a></li>
+                </ul>
+            </nav>
+
+            <div class="nav-actions">
+                <button id="themeToggleBtn" class="theme-toggle-btn" aria-label="Toggle theme">☀️</button>
+                <button id="mobileMenuBtn" class="mobile-menu-btn" aria-label="Toggle mobile menu">☰</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Drawer -->
+    <div id="mobileNavDrawer" class="mobile-nav-drawer">
+        <ul class="mobile-nav-links">
+            <li><a href="{{ url_for('home') }}" class="mobile-nav-link"><span>🏠</span> Home</a></li>
+            <li><a href="{{ url_for('translator') }}" class="mobile-nav-link"><span>📷</span> Live Translator</a></li>
+            <li><a href="{{ url_for('dictionary') }}" class="mobile-nav-link"><span>📖</span> Dictionary</a></li>
+            <li><a href="{{ url_for('about') }}" class="mobile-nav-link active"><span>ℹ️</span> About</a></li>
+        </ul>
+    </div>
+
+    <main class="container about-page">
+
+        <!-- Page Hero -->
+        <div class="section-header">
+            <span class="section-tag">PROJECT DOCUMENTATION</span>
+            <h1 class="section-title">About AI Sign Language Translator</h1>
+            <p class="section-subtitle">
+                The system is designed to assist communication between sign-language users
+                and people who do not understand sign language through real-time artificial intelligence.
+            </p>
+        </div>
+
+        <!-- Main Capabilities Grid -->
+        <div class="capabilities-grid">
+            <div class="capability-card">
+                <div class="capability-icon-wrap">⚡</div>
+                <h3>Real-Time Sign Recognition</h3>
+                <p>Processes live video feeds with ultra-low latency (~35ms inference per frame) for smooth, natural interaction.</p>
+            </div>
+
+            <div class="capability-card">
+                <div class="capability-icon-wrap">🖐</div>
+                <h3>Camera-Based Hand Detection</h3>
+                <p>Leverages MediaPipe to accurately track 21 3D spatial hand landmarks across varying illumination and backgrounds.</p>
+            </div>
+
+            <div class="capability-card">
+                <div class="capability-icon-wrap">🤖</div>
+                <h3>AI Gesture Classification</h3>
+                <p>Hybrid intelligence utilizing Convolutional Neural Networks (CNN) for static signs and temporal analysis for sequential signs.</p>
+            </div>
+
+            <div class="capability-card">
+                <div class="capability-icon-wrap">📝</div>
+                <h3>Text Translation</h3>
+                <p>Converts recognized gestures into grammatical, human-readable words, alphabet letters, numbers, and full sentences.</p>
+            </div>
+
+            <div class="capability-card">
+                <div class="capability-icon-wrap">🔊</div>
+                <h3>Text-to-Speech (TTS)</h3>
+                <p>Browser-native voice synthesis powered by Web Speech API, voicing translations aloud with natural cadence.</p>
+            </div>
+
+            <div class="capability-card">
+                <div class="capability-icon-wrap">🌐</div>
+                <h3>Multiple Languages</h3>
+                <p>Supports English, Hindi, Telugu, Tamil, Kannada, Malayalam, Spanish, and French with localized BCP-47 speech codes.</p>
+            </div>
+
+            <div class="capability-card">
+                <div class="capability-icon-wrap">📋</div>
+                <h3>Translation History</h3>
+                <p>Maintains persistent session logs with recognized sign timestamps and confidence scores, exportable and clearable.</p>
+            </div>
+
+            <div class="capability-card">
+                <div class="capability-icon-wrap">📱</div>
+                <h3>Responsive Mobile Design</h3>
+                <p>Flawlessly adapts to desktop monitors, laptops, tablets, and smartphones with mobile camera switching.</p>
+            </div>
+        </div>
+
+        <!-- 1. Dataset & Training Information -->
+        <div class="tech-block">
+            <div class="tech-block-header">
+                <h2><span>📊</span> Dataset & Training Information</h2>
+                <p>Robust machine learning requires extensive dataset diversity across real-world variations.</p>
+            </div>
+
+            <div class="dataset-spec-grid">
+                <div class="dataset-spec-item">
+                    <h4><span>✋</span> Hand Shapes</h4>
+                    <p>Captures variations in finger thickness, joint flexibility, and hand sizes across diverse demographics.</p>
+                </div>
+
+                <div class="dataset-spec-item">
+                    <h4><span>🔄</span> Hand Angles</h4>
+                    <p>Trained on yaw, pitch, and roll rotations (±25°) to guarantee recognition from imperfect camera angles.</p>
+                </div>
+
+                <div class="dataset-spec-item">
+                    <h4><span>📏</span> Distances from Camera</h4>
+                    <p>Normalizes hand scale from close-ups (0.3m) to standard desk seating distances (1.5m).</p>
+                </div>
+
+                <div class="dataset-spec-item">
+                    <h4><span>💡</span> Lighting Conditions</h4>
+                    <p>Images collected under natural sunlight, fluorescent office bulbs, dim rooms, and back-lit settings.</p>
+                </div>
+
+                <div class="dataset-spec-item">
+                    <h4><span>🖼️</span> Background Diversity</h4>
+                    <p>Hand segmentation tested against busy office spaces, living rooms, outdoor environments, and blank walls.</p>
+                </div>
+
+                <div class="dataset-spec-item">
+                    <h4><span>👥</span> Different Users</h4>
+                    <p>Incorporates recordings from multiple individuals to prevent biometric overfitting on single hands.</p>
+                </div>
+
+                <div class="dataset-spec-item">
+                    <h4><span>🧭</span> Gesture Orientations</h4>
+                    <p>Supports both left and right-handed signers with horizontal mirror invariance.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Data Preprocessing Pipeline -->
+        <div class="tech-block">
+            <div class="tech-block-header">
+                <h2><span>⚙️</span> Data Preprocessing Pipeline</h2>
+                <p>Step-by-step transformation applied to every camera frame before neural inference.</p>
+            </div>
+
+            <div class="preprocessing-list">
+                <div class="prep-step-card">
+                    <div class="prep-step-num">1</div>
+                    <div class="prep-step-content">
+                        <h4>Background Removal & Masking</h4>
+                        <p>Isolates the hand region of interest (ROI) to eliminate irrelevant visual background clutter.</p>
+                    </div>
+                </div>
+
+                <div class="prep-step-card">
+                    <div class="prep-step-num">2</div>
+                    <div class="prep-step-content">
+                        <h4>Noise Reduction</h4>
+                        <p>Gaussian blur and bilateral filtering smooth camera sensor grain and high-frequency video artifacts.</p>
+                    </div>
+                </div>
+
+                <div class="prep-step-card">
+                    <div class="prep-step-num">3</div>
+                    <div class="prep-step-content">
+                        <h4>Image Resizing (64 × 64)</h4>
+                        <p>Standardizes the extracted hand crop into fixed 64x64 pixel tensor dimensions for CNN layers.</p>
+                    </div>
+                </div>
+
+                <div class="prep-step-card">
+                    <div class="prep-step-num">4</div>
+                    <div class="prep-step-content">
+                        <h4>Pixel Normalization</h4>
+                        <p>Rescales 8-bit integer RGB values [0, 255] into floating point range [0.0, 1.0] for gradient stability.</p>
+                    </div>
+                </div>
+
+                <div class="prep-step-card">
+                    <div class="prep-step-num">5</div>
+                    <div class="prep-step-content">
+                        <h4>Hand & Palm Detection</h4>
+                        <p>Single-shot detector identifies hand presence and locates the wrist anchor point.</p>
+                    </div>
+                </div>
+
+                <div class="prep-step-card">
+                    <div class="prep-step-num">6</div>
+                    <div class="prep-step-content">
+                        <h4>Landmark Extraction</h4>
+                        <p>Extracts 21 3D spatial coordinates across wrist, thumb, index, middle, ring, and pinky joints.</p>
+                    </div>
+                </div>
+
+                <div class="prep-step-card">
+                    <div class="prep-step-num">7</div>
+                    <div class="prep-step-content">
+                        <h4>Geometric Feature Extraction</h4>
+                        <p>Calculates finger extension boolean states, Euclidean fingertip distances, and spatial orientation angles.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. AI Model Architecture: CNN & RNN/LSTM -->
+        <div class="tech-block">
+            <div class="tech-block-header">
+                <h2><span>🤖</span> AI Model Architecture</h2>
+                <p>Dual neural network paradigms tailored for both static symbols and dynamic motion sequences.</p>
+            </div>
+
+            <div class="nn-models-comparison">
+                <!-- CNN Model Card -->
+                <div class="nn-model-card">
+                    <h3>CNN (Convolutional Neural Network)</h3>
+                    <p>Designed for <strong>Static Sign Recognition</strong>, manual alphabet letters (A-Z), numbers, and stationary hand shapes.</p>
+
+                    <div class="layer-stack">
+                        <div class="layer-item"><span>Input Layer</span><strong>(64, 64, 3) RGB</strong></div>
+                        <div class="layer-item"><span>Conv2D (32 filters, 3x3)</span><strong>ReLU + BatchNorm</strong></div>
+                        <div class="layer-item"><span>MaxPooling2D (2x2)</span><strong>Stride (2, 2)</strong></div>
+                        <div class="layer-item"><span>Conv2D (64 filters, 3x3)</span><strong>ReLU + BatchNorm</strong></div>
+                        <div class="layer-item"><span>MaxPooling2D (2x2)</span><strong>Stride (2, 2)</strong></div>
+                        <div class="layer-item"><span>Conv2D (128 filters, 3x3)</span><strong>ReLU + BatchNorm</strong></div>
+                        <div class="layer-item"><span>MaxPooling2D (2x2)</span><strong>Stride (2, 2)</strong></div>
+                        <div class="layer-item"><span>Flatten Layer</span><strong>4,608 Features</strong></div>
+                        <div class="layer-item"><span>Dense Layer (256 units)</span><strong>Dropout (0.50)</strong></div>
+                        <div class="layer-item"><span>Softmax Output Layer</span><strong>26+ Classes</strong></div>
+                    </div>
+                </div>
+
+                <!-- RNN / LSTM Model Card -->
+                <div class="nn-model-card rnn">
+                    <h3>RNN / LSTM (Recurrent Neural Network)</h3>
+                    <p>Designed for <strong>Dynamic / Sequential Gestures</strong>, motion trajectories, continuous sign language, and temporal transitions.</p>
+
+                    <div class="layer-stack">
+                        <div class="layer-item"><span>Sequential Input</span><strong>(T=30 Frames, 63 Landmarks)</strong></div>
+                        <div class="layer-item"><span>LSTM Layer 1 (64 units)</span><strong>Return Sequences = True</strong></div>
+                        <div class="layer-item"><span>Dropout Layer</span><strong>Rate = 0.20</strong></div>
+                        <div class="layer-item"><span>LSTM Layer 2 (128 units)</span><strong>Return Sequences = True</strong></div>
+                        <div class="layer-item"><span>LSTM Layer 3 (64 units)</span><strong>Return Sequences = False</strong></div>
+                        <div class="layer-item"><span>Dense Layer (64 units)</span><strong>ReLU Activation</strong></div>
+                        <div class="layer-item"><span>Dense Layer (32 units)</span><strong>ReLU Activation</strong></div>
+                        <div class="layer-item"><span>Softmax Output Layer</span><strong>Temporal Gestures</strong></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. End-to-End System Pipeline -->
+        <div class="tech-block">
+            <div class="tech-block-header">
+                <h2><span>🔄</span> End-to-End System Architecture</h2>
+                <p>Complete execution flow from browser hardware to multi-lingual audio synthesis.</p>
+            </div>
+
+            <div class="nn-architecture-container">
+                <div style="font-family: monospace; font-size: 0.95rem; line-height: 2; color: #a5b4fc; text-align: center;">
+                    Browser Camera (MediaDevices WebRTC) <br>
+                    ↓ <br>
+                    HTML5 Canvas Frame Capture (300-500ms cycle) <br>
+                    ↓ <br>
+                    HTTP POST /predict API (Flask Backend) <br>
+                    ↓ <br>
+                    OpenCV Decoding & MediaPipe Hand Detection (21 3D Landmarks) <br>
+                    ↓ <br>
+                    Image Resizing (64x64) & Feature Extraction <br>
+                    ↓ <br>
+                    Trained CNN Model (`sign_language_model.keras` / `model.h5`) & Geometric Analyzer <br>
+                    ↓ <br>
+                    Classification & Confidence Computation (0-100%) <br>
+                    ↓ <br>
+                    JSON Response with Localized Translations (8 Languages) <br>
+                    ↓ <br>
+                    Dynamic UI Update & Browser Web Speech API Text-to-Speech Output
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-bottom" style="border: none; padding-top: 0;">
+            <p>© <span class="current-year"></span> SignTranslate AI. Built with Flask, OpenCV, MediaPipe, and TensorFlow.</p>
+            <p><a href="{{ url_for('home') }}">Home</a> | <a href="{{ url_for('translator') }}">Live Translator</a> | <a href="{{ url_for('dictionary') }}">Sign Dictionary</a></p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

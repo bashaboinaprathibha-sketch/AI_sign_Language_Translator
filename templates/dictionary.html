@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Dictionary | SignTranslate AI</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dictionary.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
+</head>
+<body>
+
+    <!-- TOP NAVBAR -->
+    <header class="navbar">
+        <div class="container navbar-container">
+            <a href="{{ url_for('home') }}" class="nav-brand">
+                <span class="brand-icon">🤟</span>
+                <div class="brand-text">
+                    <h1>SignTranslate <span>AI</span></h1>
+                    <span class="brand-subtitle">AI Sign Language Translator</span>
+                </div>
+            </a>
+
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="{{ url_for('home') }}" class="nav-link">Home</a></li>
+                    <li><a href="{{ url_for('translator') }}" class="nav-link">Live Translator</a></li>
+                    <li><a href="{{ url_for('dictionary') }}" class="nav-link active">Sign Dictionary</a></li>
+                    <li><a href="{{ url_for('about') }}" class="nav-link">About</a></li>
+                </ul>
+            </nav>
+
+            <div class="nav-actions">
+                <button id="themeToggleBtn" class="theme-toggle-btn" aria-label="Toggle theme">☀️</button>
+                <button id="mobileMenuBtn" class="mobile-menu-btn" aria-label="Toggle mobile menu">☰</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Drawer -->
+    <div id="mobileNavDrawer" class="mobile-nav-drawer">
+        <ul class="mobile-nav-links">
+            <li><a href="{{ url_for('home') }}" class="mobile-nav-link"><span>🏠</span> Home</a></li>
+            <li><a href="{{ url_for('translator') }}" class="mobile-nav-link"><span>📷</span> Live Translator</a></li>
+            <li><a href="{{ url_for('dictionary') }}" class="mobile-nav-link active"><span>📖</span> Dictionary</a></li>
+            <li><a href="{{ url_for('about') }}" class="mobile-nav-link"><span>ℹ️</span> About</a></li>
+        </ul>
+    </div>
+
+    <main class="container dictionary-page">
+
+        <!-- Page Header -->
+        <div class="section-header">
+            <span class="section-tag">REFERENCE & VOCABULARY</span>
+            <h1 class="section-title">Sign Language Dictionary</h1>
+            <p class="section-subtitle">
+                Browse all symbols, letters, numbers, and gestures supported by our AI translation engine.
+            </p>
+        </div>
+
+        <!-- Controls: Search & Category Filter Tabs -->
+        <div class="dictionary-controls">
+            <!-- Search Box -->
+            <div class="search-box-wrap">
+                <span class="search-icon">🔍</span>
+                <input type="text"
+                       id="dictionarySearchInput"
+                       class="dictionary-search-input"
+                       placeholder="Search signs, letters, greetings, or descriptions..."
+                       aria-label="Search signs">
+            </div>
+
+            <!-- Filter Tabs -->
+            <div class="filter-tabs">
+                <button class="filter-tab active" data-category="All">All Signs ({{ signs|length }})</button>
+                <button class="filter-tab" data-category="Alphabet">Alphabet A-Z</button>
+                <button class="filter-tab" data-category="Numbers">Numbers 0-9</button>
+                <button class="filter-tab" data-category="Greetings">Greetings</button>
+                <button class="filter-tab" data-category="Common Words">Common Words</button>
+            </div>
+        </div>
+
+        <!-- Dictionary Cards Grid -->
+        <div class="dictionary-grid">
+            {% for item in signs %}
+            <div class="sign-card"
+                 data-sign="{{ item.sign }}"
+                 data-name="{{ item.name }}"
+                 data-category="{{ item.category }}"
+                 data-desc="{{ item.description }}">
+
+                <div class="sign-card-img-wrap">
+                    {% if item.sign == 'HELLO' or item.sign == 'GOODBYE' %}👋
+                    {% elif item.sign == 'THANK YOU' %}🙏
+                    {% elif item.sign == 'YES' %}👍
+                    {% elif item.sign == 'NO' %}👎
+                    {% elif item.sign == 'HELP' %}🆘
+                    {% elif item.sign == 'PLEASE' %}🤲
+                    {% elif item.sign == 'PEACE' %}✌️
+                    {% elif item.sign == 'LOVE' %}🤟
+                    {% elif item.sign == 'OK' %}👌
+                    {% elif item.sign == 'GOOD MORNING' %}🌅
+                    {% elif item.category == 'Numbers' %}🔢
+                    {% else %}🔤
+                    {% endif %}
+                </div>
+
+                <h3 class="sign-card-title">{{ item.name }}</h3>
+
+                <span class="badge {% if item.category == 'Alphabet' %}badge-ai{% elif item.category == 'Greetings' %}badge-success{% else %}badge-warning{% endif %} sign-card-badge">
+                    {{ item.category }}
+                </span>
+
+                <p class="sign-card-desc">{{ item.description }}</p>
+            </div>
+            {% endfor %}
+        </div>
+
+    </main>
+
+    <!-- Modal Popup for Detailed Sign View -->
+    <div id="dictionaryModal" class="dictionary-modal-backdrop" role="dialog" aria-modal="true">
+        <div class="dictionary-modal-card">
+            <button id="modalCloseBtn" class="modal-close-btn" aria-label="Close modal">✕</button>
+
+            <div class="modal-body">
+                <div id="modalSignIcon" class="modal-icon-display">🤟</div>
+                <h3 id="modalSignTitle" class="modal-title">Sign Title</h3>
+                <span id="modalSignCategory" class="badge badge-ai">Category</span>
+
+                <p id="modalSignDescription" class="modal-description">
+                    Detailed hand shape description.
+                </p>
+
+                <!-- Translation Previews -->
+                <div class="modal-translations-box">
+                    <h5>Multilingual Speech Previews</h5>
+                    <div class="modal-trans-grid">
+                        <div>🇺🇸 <strong>English:</strong> Standard</div>
+                        <div>🇮🇳 <strong>Hindi:</strong> हिन्दी अनुवाद</div>
+                        <div>🇮🇳 <strong>Telugu:</strong> తెలుగు అనువాదం</div>
+                        <div>🇮🇳 <strong>Tamil:</strong> தமிழ் மொழிபெயர்ப்பு</div>
+                    </div>
+                </div>
+
+                <a href="{{ url_for('translator') }}" class="btn btn-primary" style="width: 100%;">
+                    <span>📷</span> Test This Sign in Live Translator
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-bottom" style="border: none; padding-top: 0;">
+            <p>© <span class="current-year"></span> SignTranslate AI. Complete Sign Language Reference.</p>
+            <p><a href="{{ url_for('home') }}">Home</a> | <a href="{{ url_for('translator') }}">Live Translator</a></p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

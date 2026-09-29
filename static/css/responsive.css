@@ -1,0 +1,274 @@
+/* ============================================================
+   AI SIGN LANGUAGE TRANSLATOR - RESPONSIVE BREAKPOINTS
+   Breakpoints: 1200px, 992px, 768px, 576px, 400px
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   Breakpoint: 1200px (Laptops & Small Desktops)
+   ------------------------------------------------------------ */
+@media (max-width: 1200px) {
+    .container {
+        padding: 0 1.25rem;
+    }
+
+    .hero-title {
+        font-size: 2.6rem;
+    }
+
+    .status-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .status-grid .status-card:nth-child(4),
+    .status-grid .status-card:nth-child(5) {
+        grid-column: span 1;
+    }
+
+    .workspace-grid {
+        grid-template-columns: 1.15fr 1fr;
+        gap: 1.25rem;
+    }
+
+    .translator-studio-grid {
+        grid-template-columns: 1.2fr 1fr;
+    }
+}
+
+/* ------------------------------------------------------------
+   Breakpoint: 992px (Tablets & Medium Screens)
+   ------------------------------------------------------------ */
+@media (max-width: 992px) {
+    .nav-links {
+        display: none; /* Hide desktop nav items */
+    }
+
+    .mobile-menu-btn {
+        display: flex; /* Show mobile hamburger button */
+    }
+
+    .mobile-nav-drawer {
+        display: flex;
+    }
+
+    .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        text-align: center;
+    }
+
+    .hero-badge-wrap {
+        display: flex;
+        justify-content: center;
+    }
+
+    .hero-cta-buttons {
+        justify-content: center;
+    }
+
+    .hero-visual-card {
+        max-width: 480px;
+        margin: 0 auto;
+    }
+
+    .workspace-grid {
+        grid-template-columns: 1fr; /* Stack camera above prediction */
+    }
+
+    .translator-studio-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .status-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .status-grid .status-card:last-child {
+        grid-column: span 2;
+    }
+
+    .nn-models-comparison {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+    }
+}
+
+/* ------------------------------------------------------------
+   Breakpoint: 768px (Small Tablets & Large Phones)
+   ------------------------------------------------------------ */
+@media (max-width: 768px) {
+    :root {
+        --navbar-height: 66px;
+    }
+
+    .hero-title {
+        font-size: 2.2rem;
+    }
+
+    .hero-subheading {
+        font-size: 1.15rem;
+    }
+
+    .camera-view-wrapper {
+        min-height: 280px;
+    }
+
+    .studio-video-container {
+        min-height: 280px;
+    }
+
+    .prediction-sign-display {
+        font-size: 2.4rem;
+        min-height: 3.5rem;
+    }
+
+    .pipeline-flow {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .pipeline-arrow {
+        transform: rotate(90deg);
+        margin: 0.25rem auto;
+    }
+
+    .checklist-items {
+        grid-template-columns: 1fr;
+    }
+
+    .sentence-actions-bar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+    }
+
+    .sentence-btn-group {
+        justify-content: space-between;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 1.75rem;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        gap: 0.75rem;
+        text-align: center;
+    }
+
+    .tech-block {
+        padding: 1.5rem;
+    }
+
+    .dictionary-grid {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    }
+}
+
+/* ------------------------------------------------------------
+   Breakpoint: 576px (Standard Mobile Phones)
+   ------------------------------------------------------------ */
+@media (max-width: 576px) {
+    .container {
+        padding: 0 1rem;
+    }
+
+    .brand-subtitle {
+        display: none;
+    }
+
+    .hero-title {
+        font-size: 1.85rem;
+    }
+
+    .hero-cta-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .hero-cta-buttons .btn {
+        width: 100%;
+    }
+
+    .status-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .status-grid .status-card:last-child {
+        grid-column: span 1;
+    }
+
+    .camera-controls-bar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .camera-btn-group {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .camera-btn-group .btn {
+        flex: 1;
+    }
+
+    .camera-status-pill {
+        justify-content: center;
+    }
+
+    .translation-action-buttons {
+        flex-direction: column;
+    }
+
+    .translation-action-buttons .btn {
+        width: 100%;
+    }
+
+    .filter-tabs {
+        overflow-x: auto;
+        padding-bottom: 0.5rem;
+        flex-wrap: nowrap;
+    }
+
+    .filter-tab {
+        flex-shrink: 0;
+    }
+
+    .dictionary-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.85rem;
+    }
+
+    .sign-card {
+        padding: 1rem 0.75rem;
+    }
+
+    .sign-card-img-wrap {
+        width: 70px;
+        height: 70px;
+        font-size: 2rem;
+    }
+}
+
+/* ------------------------------------------------------------
+   Breakpoint: 400px (Extra Small Mobile Devices)
+   ------------------------------------------------------------ */
+@media (max-width: 400px) {
+    .hero-title {
+        font-size: 1.6rem;
+    }
+
+    .lang-selector {
+        max-width: 110px;
+        font-size: 0.78rem;
+    }
+
+    .dictionary-grid {
+        grid-template-columns: 1fr;
+    }
+}

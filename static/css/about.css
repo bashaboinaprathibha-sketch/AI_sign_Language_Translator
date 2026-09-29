@@ -1,0 +1,238 @@
+/* ============================================================
+   AI SIGN LANGUAGE TRANSLATOR - ABOUT & ARCHITECTURE STYLES
+   ============================================================ */
+
+.about-page {
+    padding: 3.5rem 0 5rem 0;
+}
+
+/* Feature Highlights Grid */
+.capabilities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+}
+
+.capability-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 1.75rem;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    transition: transform var(--transition-fast), border-color var(--transition-fast);
+}
+
+.capability-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--border-glow);
+}
+
+.capability-icon-wrap {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-sm);
+    background: rgba(99, 102, 241, 0.12);
+    color: var(--accent-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+}
+
+.capability-card h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.capability-card p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+/* Deep Technical Sections */
+.tech-block {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    padding: 2.5rem;
+    margin-bottom: 3.5rem;
+}
+
+.tech-block-header {
+    margin-bottom: 2rem;
+}
+
+.tech-block-header h2 {
+    font-size: 1.85rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.tech-block-header p {
+    color: var(--text-secondary);
+    font-size: 1rem;
+}
+
+/* Dataset Attributes Grid */
+.dataset-spec-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+.dataset-spec-item {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.dataset-spec-item h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--accent-secondary);
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+}
+
+.dataset-spec-item p {
+    font-size: 0.84rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+}
+
+/* Preprocessing Pipeline Steps */
+.preprocessing-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
+}
+
+.prep-step-card {
+    background: var(--gradient-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 1.25rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+.prep-step-num {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--accent-primary);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.prep-step-content h4 {
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.35rem;
+}
+
+.prep-step-content p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.45;
+}
+
+/* Neural Network Architecture Visual */
+.nn-architecture-container {
+    background: rgba(5, 8, 17, 0.6);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.nn-models-comparison {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.nn-model-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 1.75rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.nn-model-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--accent-primary);
+}
+
+.nn-model-card.rnn::before {
+    background: var(--accent-secondary);
+}
+
+.nn-model-card h3 {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.nn-model-card p {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    margin-bottom: 1.25rem;
+    line-height: 1.5;
+}
+
+.layer-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.layer-item {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-subtle);
+    padding: 0.55rem 0.85rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.82rem;
+    font-family: monospace;
+    display: flex;
+    justify-content: space-between;
+    color: var(--text-secondary);
+}
+
+.layer-item strong {
+    color: var(--accent-secondary);
+}

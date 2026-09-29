@@ -1,0 +1,288 @@
+/* ============================================================
+   AI SIGN LANGUAGE TRANSLATOR - LIVE TRANSLATOR STUDIO STYLES
+   ============================================================ */
+
+.translator-page {
+    padding: 2.5rem 0 4rem 0;
+}
+
+.translator-top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.translator-title-group h1 {
+    font-size: 2.25rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+}
+
+.translator-title-group p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+/* Studio Layout Grid */
+.translator-studio-grid {
+    display: grid;
+    grid-template-columns: 1.35fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+}
+
+/* Studio Camera Panel */
+.studio-camera-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.studio-camera-header {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--border-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--gradient-card);
+}
+
+.camera-tools-strip {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.tool-toggle-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-secondary);
+    padding: 0.35rem 0.75rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.78rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    transition: all var(--transition-fast);
+}
+
+.tool-toggle-btn.active {
+    background: rgba(99, 102, 241, 0.2);
+    border-color: var(--accent-primary);
+    color: #a5b4fc;
+}
+
+.studio-video-container {
+    position: relative;
+    background: #050811;
+    min-height: 420px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.studio-video-container video {
+    width: 100%;
+    height: 100%;
+    max-height: 460px;
+    object-fit: cover;
+    transform: scaleX(-1);
+    display: none;
+}
+
+.studio-video-container canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    transform: scaleX(-1);
+    display: none;
+}
+
+/* AI Checklist Card */
+.ai-checklist-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 1.25rem;
+    margin-top: 1rem;
+}
+
+.checklist-title {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.75rem;
+}
+
+.checklist-items {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.65rem;
+}
+
+.checklist-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.84rem;
+    color: var(--text-secondary);
+}
+
+.check-icon {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    transition: all var(--transition-fast);
+}
+
+.checklist-item.active {
+    color: var(--text-primary);
+}
+
+.checklist-item.active .check-icon {
+    background: var(--accent-success);
+    border-color: var(--accent-success);
+    color: #fff;
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.4);
+}
+
+/* Sentence Builder / Translation Stream Box */
+.sentence-builder-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    padding: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.sentence-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.sentence-header h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.sentence-text-box {
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 1.25rem;
+    min-height: 90px;
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.5;
+    position: relative;
+    word-break: break-word;
+}
+
+.sentence-placeholder {
+    color: var(--text-muted);
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.sentence-actions-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.sentence-btn-group {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+}
+
+/* Auto-Speak Switch */
+.auto-speak-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 22px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.15);
+    transition: 0.25s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.25s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: var(--accent-primary);
+}
+
+input:checked + .slider:before {
+    transform: translateX(18px);
+}

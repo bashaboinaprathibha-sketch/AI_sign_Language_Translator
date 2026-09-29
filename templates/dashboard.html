@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SignTranslate AI | Real-Time AI Sign Language Translator</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- CSS -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/responsive.css') }}">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+
+        <div class="container navbar-container">
+
+            <a href="{{ url_for('home') }}" class="nav-brand">
+
+                <span class="brand-icon">🤟</span>
+
+                <div class="brand-text">
+                    <h1>SignTranslate <span>AI</span></h1>
+                    <span class="brand-subtitle">
+                        AI Sign Language Translator
+                    </span>
+                </div>
+
+            </a>
+
+            <nav>
+                <ul class="nav-links">
+
+                    <li>
+                        <a href="{{ url_for('home') }}"
+                           class="nav-link {% if active_page == 'home' or active_page == 'dashboard' %}active{% endif %}">
+                            Home
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{{ url_for('translator') }}"
+                           class="nav-link {% if active_page == 'translator' %}active{% endif %}">
+                            Live Translator
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{{ url_for('dictionary') }}"
+                           class="nav-link {% if active_page == 'dictionary' %}active{% endif %}">
+                            Sign Dictionary
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{{ url_for('about') }}"
+                           class="nav-link {% if active_page == 'about' %}active{% endif %}">
+                            About
+                        </a>
+                    </li>
+
+                </ul>
+            </nav>
+
+            <div class="nav-actions">
+
+                <select id="langSelector" class="lang-selector">
+                    <option value="en-US">English (US)</option>
+                    <option value="hi-IN">Hindi</option>
+                    <option value="te-IN">Telugu</option>
+                    <option value="ta-IN">Tamil</option>
+                    <option value="kn-IN">Kannada</option>
+                    <option value="ml-IN">Malayalam</option>
+                    <option value="es-ES">Spanish</option>
+                    <option value="fr-FR">French</option>
+                </select>
+
+                <button id="themeToggleBtn"
+                        class="theme-toggle-btn">
+                    ☀️
+                </button>
+
+                <button id="mobileMenuBtn"
+                        class="mobile-menu-btn">
+                    ☰
+                </button>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="container">
+
+        <!-- HERO -->
+        <section class="hero-section">
+
+            <div class="hero-grid">
+
+                <div class="hero-text-content">
+
+                    <span class="hero-badge">
+                        ✨ Real-Time Computer Vision & Deep Learning
+                    </span>
+
+                    <h1 class="hero-title">
+                        AI SIGN LANGUAGE
+                        <span>TRANSLATOR</span>
+                    </h1>
+
+                    <h2 class="hero-subheading">
+                        Communicate without barriers using real-time
+                        artificial intelligence.
+                    </h2>
+
+                    <p class="hero-description">
+                        Translate sign language gestures into
+                        human-readable text and speech using computer
+                        vision, hand landmark tracking and AI models.
+                    </p>
+
+                    <div class="hero-cta-buttons">
+
+                        <a href="#live-dashboard"
+                           class="btn btn-primary">
+                            ▶ Start Live Translation
+                        </a>
+
+                        <a href="{{ url_for('dictionary') }}"
+                           class="btn btn-secondary">
+                            📖 Explore Sign Dictionary
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <div class="hero-visual-card">
+
+                    <div class="visual-sign-display">
+
+                        <div class="visual-hand-gesture">
+                            🤟
+                        </div>
+
+                        <div class="badge badge-ai">
+                            MediaPipe + CNN Hybrid AI
+                        </div>
+
+                        <h3>
+                            Live Neural Recognition
+                        </h3>
+
+                        <p>
+                            Captures hand landmarks in real time
+                            and classifies gestures.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- STATUS -->
+        <section class="status-cards-section">
+
+            <div class="status-grid">
+
+                <div class="status-card">
+                    <div class="status-icon-box">📷</div>
+                    <div class="status-info">
+                        <span class="status-label">Camera</span>
+
+                        <span class="status-value">
+                            <span id="cardCameraDot"
+                                  class="status-indicator-dot offline">
+                            </span>
+
+                            <span id="cardCameraStatus">
+                                Offline
+                            </span>
+                        </span>
+                    </div>
+                </div>
+
+
+                <div class="status-card">
+                    <div class="status-icon-box">🤖</div>
+
+                    <div class="status-info">
+                        <span class="status-label">
+                            AI Model
+                        </span>
+
+                        <span class="status-value">
+                            <span id="cardModelDot"
+                                  class="status-indicator-dot ready">
+                            </span>
+
+                            <span id="cardModelStatus">
+                                Ready
+                            </span>
+                        </span>
+                    </div>
+                </div>
+
+
+                <div class="status-card">
+                    <div class="status-icon-box">🖐</div>
+
+                    <div class="status-info">
+                        <span class="status-label">
+                            Detection
+                        </span>
+
+                        <span class="status-value">
+                            <span id="cardDetectionDot"
+                                  class="status-indicator-dot waiting">
+                            </span>
+
+                            <span id="cardDetectionStatus">
+                                Waiting
+                            </span>
+                        </span>
+                    </div>
+                </div>
+
+
+                <div class="status-card">
+                    <div class="status-icon-box">🔊</div>
+
+                    <div class="status-info">
+                        <span class="status-label">
+                            Voice
+                        </span>
+
+                        <span class="status-value">
+                            <span class="status-indicator-dot available">
+                            </span>
+
+                            <span id="cardVoiceStatus">
+                                Available
+                            </span>
+                        </span>
+                    </div>
+                </div>
+
+
+                <div class="status-card">
+                    <div class="status-icon-box">⚡</div>
+
+                    <div class="status-info">
+                        <span class="status-label">
+                            API
+                        </span>
+
+                        <span class="status-value">
+                            <span class="status-indicator-dot connected">
+                            </span>
+
+                            <span id="cardApiStatus">
+                                Connected
+                            </span>
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- LIVE DASHBOARD -->
+        <section class="dashboard-workspace"
+                 id="live-dashboard">
+
+            <div class="workspace-grid">
+
+                <!-- CAMERA -->
+                <div class="dashboard-panel">
+
+                    <div class="panel-header">
+
+                        <div class="panel-header-left">
+
+                            <h3 class="panel-title">
+                                📷 Live Camera Preview
+                            </h3>
+
+                            <span class="panel-subtitle">
+                                Hold your hand clearly inside
+                                the camera frame
+                            </span>
+
+                        </div>
+
+                        <div class="camera-status-pill">
+
+                            <span id="cameraStatusDot"
+                                  class="status-indicator-dot offline">
+                            </span>
+
+                            <span id="cameraStatusText">
+                                Camera Off
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="camera-view-wrapper">
+
+                        <div class="camera-live-badge">
+                            <span class="pulse-dot"></span>
+                            LIVE FEED
+                        </div>
+
+                        <video id="camera"
+                               autoplay
+                               playsinline
+                               muted>
+                        </video>
+
+                        <canvas id="cameraOverlayCanvas">
+                        </canvas>
+
+                        <div id="cameraPlaceholder"
+                             class="camera-placeholder">
+
+                            <div class="camera-placeholder-icon">
+                                📷
+                            </div>
+
+                            <h3>
+                                Camera is Turned Off
+                            </h3>
+
+                            <p>
+                                Click Start Camera to begin
+                                sign recognition.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="camera-controls-bar">
+
+                        <button id="startCamera"
+                                class="btn btn-primary">
+                            ▶ Start Camera
+                        </button>
+
+                        <button id="stopCamera"
+                                class="btn btn-secondary">
+                            ■ Stop Camera
+                        </button>
+
+                        <button id="captureFrame"
+                                class="btn btn-secondary">
+                            📸 Capture Frame
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- AI PREDICTION -->
+                <div class="dashboard-panel">
+
+                    <div class="panel-header">
+
+                        <div class="panel-header-left">
+
+                            <h3 class="panel-title">
+                                🤖 AI Prediction & Translation
+                            </h3>
+
+                            <span class="panel-subtitle">
+                                Real-time computer vision inference
+                            </span>
+
+                        </div>
+
+                        <span class="badge badge-ai">
+                            CNN Active
+                        </span>
+
+                    </div>
+
+
+                    <div class="prediction-panel-body">
+
+                        <div class="prediction-box-main">
+
+                            <div class="prediction-box-header">
+
+                                <span class="prediction-section-label">
+                                    DETECTED SIGN
+                                </span>
+
+                                <span id="predictionSignIcon">
+                                    🤟
+                                </span>
+
+                            </div>
+
+                            <div id="predictionSign"
+                                 class="prediction-sign-display">
+                                —
+                            </div>
+
+                            <p id="predictionStatus">
+                                Waiting for camera input...
+                            </p>
+
+                        </div>
+
+
+                        <!-- CONFIDENCE -->
+                        <div class="confidence-module">
+
+                            <div class="confidence-header-row">
+
+                                <span>
+                                    Recognition Confidence
+                                </span>
+
+                                <strong id="confidenceValue">
+                                    0%
+                                </strong>
+
+                            </div>
+
+                            <div class="confidence-track">
+
+                                <div id="confidenceBar"
+                                     class="confidence-fill"
+                                     style="width:0%;">
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- TRANSLATION -->
+                        <div class="translation-module">
+
+                            <div class="translation-label-row">
+
+                                <span>
+                                    TRANSLATION
+                                </span>
+
+                                <span class="badge badge-ai">
+                                    Text & Voice
+                                </span>
+
+                            </div>
+
+                            <div id="translationText"
+                                 class="translation-output-text">
+                                Waiting for translation...
+                            </div>
+
+                            <div id="multilingualSub">
+                            </div>
+
+
+                            <div class="translation-action-buttons">
+
+                                <button id="speakButton"
+                                        class="btn btn-success">
+                                    🔊 Speak Translation
+                                </button>
+
+                                <button id="stopVoiceButton"
+                                        class="btn btn-secondary">
+                                    ⏹ Stop Voice
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- HISTORY -->
+        <section class="history-section">
+
+            <div class="table-card">
+
+                <div class="table-header-bar">
+
+                    <h3 class="panel-title">
+                        📋 Recent Translations
+                    </h3>
+
+                    <button id="clearHistoryBtn"
+                            class="btn btn-secondary">
+                        🗑 Clear History
+                    </button>
+
+                </div>
+
+
+                <div class="table-responsive">
+
+                    <table class="history-table">
+
+                        <thead>
+                            <tr>
+                                <th>Sign</th>
+                                <th>Translation</th>
+                                <th>Confidence</th>
+                                <th>Time</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="historyTableBody">
+
+                            <tr>
+
+                                <td colspan="4">
+
+                                    <div class="empty-history-msg">
+
+                                        <span>
+                                            📋
+                                        </span>
+
+                                        <p>
+                                            No translations yet.
+                                            Start the camera to begin.
+                                        </p>
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer class="footer">
+
+        <div class="container">
+
+            <p>
+                © <span class="current-year"></span>
+                SignTranslate AI.
+                All rights reserved.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <!-- JAVASCRIPT -->
+    <script src="{{ url_for('static', filename='js/camera.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='js/translator.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+</body>
+
+</html>s

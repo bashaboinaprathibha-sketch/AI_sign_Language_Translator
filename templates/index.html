@@ -1,0 +1,33 @@
+{% extends "dashboard.html" %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h1>AI Sign Language Translator</h1>
+
+    <p class="lead">
+        Welcome to the AI Sign Language Translator.
+    </p>
+
+    <div class="card mt-4">
+        <div class="card-body">
+
+            <h3>Sign Language Recognition</h3>
+
+            <p>
+                Use your camera to show sign language gestures.
+                The AI model detects the hand gesture and converts
+                it into human-readable text.
+            </p>
+
+            <a href="{{ url_for('translator') }}" class="btn btn-primary">
+                Start Translator
+            </a>
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
